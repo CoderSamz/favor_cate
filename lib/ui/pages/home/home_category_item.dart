@@ -1,0 +1,40 @@
+import 'package:favor_cate/ui/pages/meal/meal_page.dart';
+import 'package:flutter/material.dart';
+import 'package:favor_cate/core/model/category_model.dart';
+import 'package:favor_cate/core/extension/int_extension.dart';
+
+
+class HYHomeCategoryItem extends StatelessWidget {
+  final HYCategoryModel _category;
+
+  HYHomeCategoryItem(this._category);
+
+  @override
+  Widget build(BuildContext context) {
+    final bgColor = _category.cColor;
+    return GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(12.px),
+          gradient: LinearGradient(
+            colors: [
+              bgColor.withOpacity(.5),
+              bgColor
+            ],
+          ),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          _category.title,
+          style: Theme.of(context).textTheme.headline3.copyWith(
+              fontWeight: FontWeight.bold
+          ),
+        )
+      ),
+      onTap: () {
+        Navigator.of(context).pushNamed(HYMealScreen.routeName, arguments: _category);
+      },
+    );
+  }
+}
